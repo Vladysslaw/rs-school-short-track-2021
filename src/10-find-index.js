@@ -11,14 +11,21 @@
  * For ([1, 2, 3], 2) should return 1
  *
  */
-function findIndex(array, value) {
-  let index;
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] === value) {
-      index = i;
-    }
+function binary (d, t, s, e) {
+  const middle = Math.floor((s + e) / 2);
+  if (t === d[middle]) {
+    return middle;
   }
-  return index;
+  if (t >= d[s] && t < d[middle]) {
+    return binary(d, t, s, middle - 1);
+  }
+  if (t > d[middle] && t <= d[e]) {
+    return binary(d, t, middle + 1, e);
+  }
+  return middle;
+}
+function findIndex(array, value) {
+  return binary(array, value, 0, array.length - 1);
 }
 
 module.exports = findIndex;
